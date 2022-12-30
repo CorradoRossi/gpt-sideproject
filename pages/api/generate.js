@@ -15,11 +15,13 @@ export default async function (req, res) {
     return;
   }
 
-  const animal = req.body.animal || '';
-  if (animal.trim().length === 0) {
+  const time = req.body.time || '';
+  const season = req.body.season || '';
+  const state = req.body.state || '';
+  if (time.trim().length === 0 || season.trim().length === 0 || state.trim().length === 0) {
     res.status(400).json({
       error: {
-        message: "Please enter a valid animal",
+        message: "Please enter a valid time, season, and state.",
       }
     });
     return;
@@ -28,7 +30,7 @@ export default async function (req, res) {
   try {
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: generatePrompt(animal),
+      prompt: generatePrompt(time, season, state),
       temperature: 0.6,
     });
     res.status(200).json({ result: completion.data.choices[0].text });
@@ -48,15 +50,26 @@ export default async function (req, res) {
   }
 }
 
-function generatePrompt(animal) {
-  const capitalizedAnimal =
-    animal[0].toUpperCase() + animal.slice(1).toLowerCase();
-  return `Suggest three names for an animal that is a superhero.
+function generatePrompt(time, season, state) {
+  const capitalizedTime =
+    time[0].toUpperCase() + time.slice(1).toLowerCase();
+  const capitalizedSeason =
+    season[0].toUpperCase() + season.slice(1).toLowerCase();
+  const capitalizedState =
+    state[0].toUpperCase() + state.slice(1).toLowerCase();
+    console.log(capitalizedTime, capitalizedSeason, capitalizedState);
+  return `Suggest three activities to do during the season, at the time, and in the state specified.
 
-Animal: Cat
-Names: Captain Sharpclaw, Agent Fluffball, The Incredible Feline
-Animal: Dog
-Names: Ruff the Protector, Wonder Canine, Sir Barks-a-Lot
-Animal: ${capitalizedAnimal}
-Names:`;
+Time: Morning
+Season: Summer
+State: Florida
+Activities: Go to the beach, go to the park, go to the mall
+Time: Alaska
+Season: Winter
+State: Afternoon
+Activities: Hike a mountain, go crabfishing, go snowboarding
+Time: ${capitalizedTime}
+Season: ${capitalizedSeason}
+State: ${capitalizedState}
+Activities:`;
 }

@@ -3,7 +3,9 @@ import { useState } from "react";
 import styles from "./index.module.css";
 
 export default function Home() {
-  const [animalInput, setAnimalInput] = useState("");
+  const [timeInput, setTimeInput] = useState("");
+  const [seasonInput, setSeasonInput] = useState("");
+  const [stateInput, setStateInput] = useState("");
   const [result, setResult] = useState();
 
   async function onSubmit(event) {
@@ -14,7 +16,7 @@ export default function Home() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ animal: animalInput }),
+        body: JSON.stringify({ time: timeInput, season: seasonInput, state: stateInput }),
       });
 
       const data = await response.json();
@@ -23,7 +25,9 @@ export default function Home() {
       }
 
       setResult(data.result);
-      setAnimalInput("");
+      setTimeInput("");
+      setSeasonInput("");
+      setStateInput("");
     } catch(error) {
       // Consider implementing your own error handling logic here
       console.error(error);
@@ -34,22 +38,35 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>OpenAI Quickstart</title>
+        <title>Things to do app</title>
         <link rel="icon" href="/dog.png" />
       </Head>
 
       <main className={styles.main}>
-        <img src="/dog.png" className={styles.icon} />
-        <h3>Name my pet</h3>
+        <h3>Recommend something to do</h3>
         <form onSubmit={onSubmit}>
           <input
             type="text"
-            name="animal"
-            placeholder="Enter an animal"
-            value={animalInput}
-            onChange={(e) => setAnimalInput(e.target.value)}
+            name="time"
+            placeholder="Enter a time of day"
+            value={timeInput}
+            onChange={(e) => setTimeInput(e.target.value)}
           />
-          <input type="submit" value="Generate names" />
+          <input
+            type="text"
+            name="season"
+            placeholder="Enter a season"
+            value={seasonInput}
+            onChange={(e) => setSeasonInput(e.target.value)}
+          />
+          <input
+            type="text"
+            name="state"
+            placeholder="Enter a state"
+            value={stateInput}
+            onChange={(e) => setStateInput(e.target.value)}
+          />
+          <input type="submit" value="Generate activities" />
         </form>
         <div className={styles.result}>{result}</div>
       </main>
