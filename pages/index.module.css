@@ -49,17 +49,17 @@
 }
 .main input[type="text"] {
   padding: 12px 16px;
-  border: 1px solid #176806;
+  border: 1px solid #3d0557;
   border-radius: 4px;
   margin-bottom: 24px;
-  outline-color: #176806;
+  outline-color: #3d0557;
 }
 .main select[type="text"] {
   padding: 12px 16px;
-  border: 1px solid #176806;
+  border: 1px solid #3d0557;
   border-radius: 4px;
   margin-bottom: 24px;
-  outline-color: #176806;
+  outline-color: #3d0557;
 }
 .main ::placeholder {
   color: #8e8ea0;
@@ -68,7 +68,7 @@
 .main input[type="submit"] {
   padding: 12px 0;
   color: #fff;
-  background-color: #176806;
+  background-color: #3d0557;
   border: none;
   border-radius: 4px;
   text-align: center;
