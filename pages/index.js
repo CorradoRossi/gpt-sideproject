@@ -6,7 +6,7 @@ export default function Home() {
   const [timeInput, setTimeInput] = useState("");
   const [seasonInput, setSeasonInput] = useState("");
   const [stateInput, setStateInput] = useState("");
-  const [result, setResult] = useState();
+  const [result, setResult] = useState("");
 
   async function onSubmit(event) {
     event.preventDefault();
@@ -25,6 +25,7 @@ export default function Home() {
       }
 
       setResult(data.result);
+      console.log(data.result);
       setTimeInput("");
       setSeasonInput("");
       setStateInput("");
@@ -43,7 +44,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h3>Recommend something to do</h3>
+        <h3>Recommend some things to do</h3>
         <form onSubmit={onSubmit}>
           <input
             type="text"

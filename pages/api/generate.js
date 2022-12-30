@@ -31,7 +31,8 @@ export default async function (req, res) {
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
       prompt: generatePrompt(time, season, state),
-      temperature: 0.6,
+      temperature: 0.8,
+      max_tokens: 200,
     });
     res.status(200).json({ result: completion.data.choices[0].text });
   } catch(error) {
@@ -58,16 +59,16 @@ function generatePrompt(time, season, state) {
   const capitalizedState =
     state[0].toUpperCase() + state.slice(1).toLowerCase();
     console.log(capitalizedTime, capitalizedSeason, capitalizedState);
-  return `Suggest three activities to do during the season, at the time, and in the state specified.
+  return `Suggest three activities to do during the season, at the time, and in the state specified. Be specific and use your imagination!
 
 Time: Morning
 Season: Summer
 State: Florida
-Activities: Go to the beach, go to the park, go to the mall
-Time: Alaska
+Activities: Go to the beach and play frisbee, go to the park to walk a dog, go to the mall and buy a pair of sneakers
+Time: Afternoon
 Season: Winter
-State: Afternoon
-Activities: Hike a mountain, go crabfishing, go snowboarding
+State: Alaska
+Activities: Hike a pristine mountain and take in the view, go crabfishing with a fisherman crew, go snowboarding on one of the best mountains in the world
 Time: ${capitalizedTime}
 Season: ${capitalizedSeason}
 State: ${capitalizedState}
