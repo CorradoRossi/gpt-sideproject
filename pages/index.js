@@ -1,21 +1,12 @@
 import Head from "next/head";
 import { useState } from "react";
 import styles from "./index.module.css";
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
-
-const stripePromise = loadStripe("pk_test_Zaa1jeoGF9VWbSQzmU1j9Fgj");
 
 export default function Home() {
   const [timeInput, setTimeInput] = useState("");
   const [seasonInput, setSeasonInput] = useState("");
   const [stateInput, setStateInput] = useState("");
   const [result, setResult] = useState("");
-
-  const options = {
-    // passing the client secret obtained from the server
-    clientSecret: process.env.STRIPE_CLIENT_SECRET,
-  };
 
   async function onSubmit(event) {
     event.preventDefault();
@@ -143,15 +134,6 @@ export default function Home() {
           <input type="submit" value="Generate activities" />
         </form>
         <div className={styles.result}>{result}</div>
-        <Elements stripe={stripePromise} options={options}>
-          <form id="payment-form">
-            <div id="payment-element">
-            </div>
-            <button id="submit">Submit</button>
-            <div id="error-message">
-            </div>
-          </form>
-        </Elements>
       </main>
     </div>
   );
