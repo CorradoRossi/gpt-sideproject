@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./index.module.css";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
@@ -10,7 +10,7 @@ export default function Home() {
   const [stateInput, setStateInput] = useState("");
   const [result, setResult] = useState("");
 
-  const firebaseConfig = {
+  /*const firebaseConfig = {
     apiKey: process.env.FIREBASE_API_KEY,
     authDomain: process.env.FIREBASE_AUTH_DOMAIN,
     projectId: process.env.FIREBASE_PROJECT_ID,
@@ -18,11 +18,24 @@ export default function Home() {
     messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
     appId: process.env.FIREBASE_APP_ID,
     measurementId: process.env.FIREBASE_MEASUREMENT_ID,
+  };*/
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAxeHlbsSw7qQ4eSZwUVp9UYFT-nO3PPFQ",
+    authDomain: "gpt-project-32a5f.firebaseapp.com",
+    projectId: "gpt-project-32a5f",
+    storageBucket: "gpt-project-32a5f.appspot.com",
+    messagingSenderId: "672644188515",
+    appId: "1:672644188515:web:663a18d9cceea38d792b56",
+    measurementId: "G-0SQG379R6W",
   };
 
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-  console.log(analytics);
+  
+  useEffect(() => {
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    console.log(analytics);
+  }, []);
 
   async function onSubmit(event) {
     event.preventDefault();
