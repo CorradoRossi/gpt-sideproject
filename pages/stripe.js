@@ -9,7 +9,7 @@ import CheckoutForm from "../components/CheckoutForm";
 // This is your test publishable API key.
 const stripePromise = loadStripe(
   //process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
-  "pk_test_Zaa1jeoGF9VWbSQzmU1j9Fgj"
+  process.env.STRIPE_PUBLISHABLE_KEY_TEST
 );
 
 export default function App() {
