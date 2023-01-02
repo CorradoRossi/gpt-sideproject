@@ -20,7 +20,7 @@ export default function App() {
     fetch("/api/create-payment-intent", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ items: [{ id: "xl-tshirt" }] }),
+      body: JSON.stringify({ items: [{ id: "metastash-subscription" }] }),
     })
       .then((res) => res.json())
       .then((data) => setClientSecret(data.clientSecret));
@@ -38,9 +38,6 @@ export default function App() {
     clientSecret,
     appearance,
   };
-  console.log("options: ", options);
-  console.log("clientSecret: ", clientSecret);
-  console.log("appearance: ", appearance);
 
   return (
     <div className="App">

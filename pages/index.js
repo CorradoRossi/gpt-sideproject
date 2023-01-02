@@ -25,7 +25,6 @@ export default function Home() {
       }
 
       setResult(data.result);
-      console.log(data.result);
       setTimeInput("");
       setSeasonInput("");
       setStateInput("");
