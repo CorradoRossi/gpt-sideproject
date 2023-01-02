@@ -15,6 +15,7 @@ export default function CheckoutForm() {
   const [isLoading, setIsLoading] = React.useState(false);
 
   const btnStyle = {
+    width: "320px",
     padding: "12px 16px",
     color: "#fff",
     backgroundColor: "#3d0557",
