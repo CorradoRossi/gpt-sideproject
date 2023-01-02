@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./index.module.css";
 
 export default function Home() {
@@ -7,6 +7,24 @@ export default function Home() {
   const [seasonInput, setSeasonInput] = useState("");
   const [stateInput, setStateInput] = useState("");
   const [result, setResult] = useState("");
+  const [word, setWord] = useState("");
+  const [wordResult, setWordResult] = useState({});
+
+  async function getWord(event) {
+    event.preventDefault();
+    const options = {
+      method: "GET",
+      headers: {
+        "X-RapidAPI-Key": "364a1ca3eemsh805357223025438p1ad097jsnc54fa13cb126",
+        "X-RapidAPI-Host": "wordsapiv1.p.rapidapi.com",
+      },
+    };
+
+    await fetch(`https://wordsapiv1.p.rapidapi.com/words/${word}/similarTo`, options)
+      .then((response) => response.json())
+      .then((response) => setWordResult(response))
+      .catch((err) => console.error(err));
+  }
 
   async function onSubmit(event) {
     event.preventDefault();
@@ -25,7 +43,6 @@ export default function Home() {
       }
 
       setResult(data.result);
-      console.log(data.result);
       setTimeInput("");
       setSeasonInput("");
       setStateInput("");
@@ -134,6 +151,21 @@ export default function Home() {
           <input type="submit" value="Generate activities" />
         </form>
         <div className={styles.result}>{result}</div>
+        <form onSubmit={getWord}>
+          <input
+            type="text"
+            name="word"
+            placeholder="Enter a word"
+            value={word}
+            onChange={(e) => setWord(e.target.value)}
+          />
+          <input type="submit" value="Submit" />
+        </form>
+        <div className={styles.result}>
+          {wordResult?.similarTo?.map((word, index) => {
+            return <p key={index}>{word}</p>
+          })}
+        </div>
       </main>
     </div>
   );
