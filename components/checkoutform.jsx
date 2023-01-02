@@ -14,6 +14,16 @@ export default function CheckoutForm() {
   const [message, setMessage] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(false);
 
+  const btnStyle = {
+    padding: "12px 16px",
+    color: "#fff",
+    backgroundColor: "#3d0557",
+    border: "none",
+    borderRadius: "8px",
+    textAlign: "center",
+    cursor: "pointer"
+  }
+
   React.useEffect(() => {
     if (!stripe) {
       return;
@@ -89,7 +99,7 @@ export default function CheckoutForm() {
         onChange={(e) => setEmail(e.target.value)}
       />
       <PaymentElement id="payment-element" options={paymentElementOptions} />
-      <button disabled={isLoading || !stripe || !elements} id="submit">
+      <button style={btnStyle} disabled={isLoading || !stripe || !elements} id="submit">
         <span id="button-text">
           {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
         </span>

@@ -1,11 +1,11 @@
 // This is your test secret API key.
-const stripe = require("stripe")(process.env.STRIPE_CLIENT_SECRET_TEST);
+const stripe = require("stripe")("sk_test_xGc391tQp3lVCL3oGrEmYVaW");
 
 const calculateOrderAmount = (items) => {
   // Replace this constant with a calculation of the order's amount
   // Calculate the order total on the server to prevent
   // people from directly manipulating the amount on the client
-  return 1400;
+  return 900;
 };
 
 export default async function handler(req, res) {

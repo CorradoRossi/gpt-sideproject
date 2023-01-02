@@ -1,7 +1,6 @@
 import React from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
-
 import CheckoutForm from "../components/CheckoutForm";
 
 // Make sure to call loadStripe outside of a component’s render to avoid
@@ -28,20 +27,30 @@ export default function App() {
   }, []);
 
   const appearance = {
-    theme: "stripe",
+    theme: "flat",
+    variables: {
+      colorPrimary: "#344960",
+      colorBackground: "#dedede",
+      colorText: "#17171c",
+    },
   };
   const options = {
     clientSecret,
     appearance,
   };
+  console.log("options: ", options);
+  console.log("clientSecret: ", clientSecret);
+  console.log("appearance: ", appearance);
 
   return (
     <div className="App">
-      {clientSecret && (
-        <Elements options={options} stripe={stripePromise}>
-          <CheckoutForm />
-        </Elements>
-      )}
+      <main>
+        {clientSecret && (
+          <Elements options={options} stripe={stripePromise}>
+            <CheckoutForm />
+          </Elements>
+        )}
+      </main>
     </div>
   );
 }
